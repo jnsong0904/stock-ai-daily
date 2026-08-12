@@ -1,0 +1,23 @@
+# WorkBuddy 工作区数据（记忆、自动化备份等，私密，禁止上传）
+.workbuddy/
+
+# 根目录下无关的 AI 晨报仪表盘文件（另一个项目）
+/ai-daily-*.html
+/daily.json
+/gen_dashboard.py
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 本地/瞬态文件
+scripts/proxies.json
+scripts/websearch_raw.json
+sec-ai-cloud-test/
+
+# 调试页
+site/calendar-test.html
+
+# 操作系统
+.DS_Store
+Thumbs.db
