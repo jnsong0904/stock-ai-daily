@@ -25,9 +25,10 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: 运行采集管线（云端源：App Store + 东方财富，免 key）
+      - name: 运行采集管线（App Store + 东方财富 + Tavily）
         env:
           SEC_AI_SOURCES: scripts/sources.cloud.json
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
         run: |
           cd scripts
           python collect.py
