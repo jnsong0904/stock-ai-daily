@@ -944,7 +944,126 @@ def parse_bing_news(src, since, until):
 
 
 # ============================================================
-#  源五：AI 联网搜索（自动化 WebSearch 写出）
+#  源五：Tavily 全网搜索（真·全网，免代理，云上用）
+# ============================================================
+
+def _tavily_search(query, api_key, max_results=8):
+    """Tavily Search API（POST https://api.tavily.com/search）。
+    返回 [{title, url, content}]；失败返回 []。"""
+    body = json.dumps({
+        "api_key": api_key,
+        "query": query,
+        "search_depth": "advanced",
+        "max_results": int(max_results),
+        "include_answer": False,
+        "include_raw_content": False,
+    }).encode("utf-8")
+    req = urllib.request.Request(
+        "https://api.tavily.com/search", data=body,
+        headers={"Content-Type": "application/json", "User-Agent": UA})
+    with urllib.request.urlopen(req, timeout=30, context=_CTX) as r:
+        data = json.loads(r.read().decode("utf-8", "replace"))
+    return data.get("results") or []
+
+
+def parse_tavily(src, since, until):
+    """Tavily 全网搜索（云版广度源）。
+
+    覆盖面远大于单一财经站：Tavily 聚合全网网页，适合捕捉东方财富索引不到的
+    券商 AI 动态（官网公告、科技媒体、地方媒体、备案公示等）。
+    需环境变量 TAVILY_API_KEY；未配置时静默跳过（不影响其他源）。
+    信噪比复用三层过滤 + 合规类放宽（与 bing_news 同口径）。
+    是否「新」由 collect.py 指纹库判定。
+    """
+    api_key = os.environ.get("TAVILY_API_KEY", "").strip()
+    if not api_key:
+        print("  [skip] Tavily 未配置 TAVILY_API_KEY，跳过")
+        _LAST_SOURCE_STATUS["tavily"] = {
+            "status": "skipped", "error": "no key", "fetched": 0,
+            "note": "未配置 TAVILY_API_KEY（可选源，跳过）"}
+        return []
+
+    queries = src.get("queries") or [{"kw": k} for k in (src.get("keywords") or [])]
+    max_per = int(src.get("maxPerQuery", 8))
+    query_delay = float(src.get("queryDelay", 1.0))
+    compliance_kws = ["备案", "算法备案", "模型备案", "网信办", "监管", "安全评估"]
+
+    seen_url, out = set(), []
+    for q in queries:
+        kw = (q.get("kw") if isinstance(q, dict) else q) or ""
+        kw = kw.strip()
+        if not kw:
+            continue
+        try:
+            results = _tavily_search(kw, api_key, max_per)
+        except Exception as e:
+            print(f"  [ERR ] Tavily 检索「{kw}」失败：{type(e).__name__}: {e}")
+            _LAST_SOURCE_STATUS["tavily"] = {"status": "failed",
+                "error": f"{type(e).__name__}: {e}", "fetched": len(out)}
+            return out
+
+        cnt = 0
+        for r in results:
+            u = r.get("url", "")
+            if not u or u in seen_url:
+                continue
+            seen_url.add(u)
+            title = strip_html(r.get("title", ""))
+            summary = strip_html(r.get("content", ""))
+            if not title:
+                continue
+
+            ok, score, why = _relevance(title, summary)
+            if not ok and any(k in (title + " " + summary) for k in compliance_kws):
+                ai_hit = _hit(title + " " + summary, AI_TERMS + AI_BRANDS)
+                broker_hit = _hit(title + " " + summary, BROKER_TERMS)
+                if ai_hit and broker_hit:
+                    ok, score, why = True, 3, f"合规/监管动态（{','.join(compliance_kws[:3])}）"
+            if not ok:
+                continue
+
+            blob = title + " " + summary
+            broker = guess_broker(title, summary)
+            out.append({
+                "id": "tv-" + hashlib.md5((kw + u).encode("utf-8")).hexdigest()[:14],
+                "broker": broker,
+                "app": "—",
+                "module": guess_module(blob),
+                "type": guess_type(blob),
+                "title": title,
+                "summary": summary[:160],
+                "content": summary,
+                "source": "Tavily · 全网搜索",
+                "sourceType": "全网新闻",
+                "sourceUrl": u,
+                "publishedAt": "",
+                "tags": sorted(set(hit_ai(blob)))[:6],
+                "analysis": {
+                    "相关度得分": str(score),
+                    "判定依据": why,
+                    "命中AI能力词": "、".join(sorted(set(hit_ai(blob)))[:8]) or "—",
+                    "涉及机构": "、".join(sorted(set(_hit(blob, BROKER_TERMS)))[:6]) or "—",
+                    "检索关键词": kw,
+                },
+                "_score": score,
+            })
+            cnt += 1
+
+        print(f"  [ + ] Tavily 检索「{kw}」→ 命中 {cnt} 条")
+        if query_delay:
+            time.sleep(query_delay)
+
+    out.sort(key=lambda x: -x["_score"])
+    for k in out:
+        k.pop("_score", None)
+    _LAST_SOURCE_STATUS["tavily"] = {
+        "status": "success" if out else "empty", "error": "", "fetched": len(out)}
+    print(f"  [stat] Tavily 全网搜索源共 {len(out)} 条")
+    return out
+
+
+# ============================================================
+#  源六：AI 联网搜索（自动化 WebSearch 写出）
 # ============================================================
 
 def parse_websearch_raw(src, since, until):
@@ -1034,6 +1153,7 @@ PARSERS = {
     "eastmoney_search": parse_eastmoney_search,   # 已停用：sources.json 中 disabled
     "sogou_wechat": parse_sogou_wechat,
     "bing_news": parse_bing_news,
+    "tavily": parse_tavily,                       # 云版真·全网搜索（需 TAVILY_API_KEY，未配置自动跳过）
     "websearch_raw": parse_websearch_raw,         # 自动化 WebSearch 写出 → collect.py 并入
 }
 
