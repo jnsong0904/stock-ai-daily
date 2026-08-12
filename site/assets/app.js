@@ -63,12 +63,11 @@ function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","
 let DATA = null;
 async function loadData(){
   if(DATA) return DATA;
-  // 优先 jsDelivr（国内可稳定访问的 GitHub 镜像，每日缓存键保证新鲜度），
-  // 失败回退本地 ./data/data.json。这样 CloudStudio 托管页也能展示云端最新数据。
-  const CDN = "https://cdn.jsdelivr.net/gh/jnsong0904/stock-ai-daily@main/site/data/data.json";
-  const dkey = new Date().toISOString().slice(0,10);
+  // 数据真相源是 github.io（GitHub Actions 每日更新）。所有前台（github.io / CloudStudio / jsDelivr）
+  // 统一从这里拉最新数据；github.io 不可达时回退本地 ./data/data.json。
+  const SRC = "https://jnsong0904.github.io/stock-ai-daily/data/data.json";
   try {
-    const r = await fetch(CDN + "?d=" + dkey, {cache:"no-store"});
+    const r = await fetch(SRC, {cache:"no-store"});
     if(r.ok){ const j = await r.json(); if(j && j.items){ DATA = j; return DATA; } }
   } catch(e){ /* 回退本地 */ }
   const res = await fetch("./data/data.json", {cache:"no-store"});
