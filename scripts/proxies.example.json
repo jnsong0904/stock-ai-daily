@@ -1,0 +1,14 @@
+{
+  "_comment": "代理池配置。复制本文件为 proxies.json 并填入你的代理地址即可生效。",
+  "_formats": [
+    "http://ip:port",
+    "http://user:pass@ip:port",
+    "https://ip:port"
+  ],
+  "_note": "每行一个代理；采集时自动环形轮换以绕开微信/必应的 IP 限流。SOCKS5 需先 pip install PySocks。",
+  "proxies": [
+    "http://1.2.3.4:8080",
+    "http://user:pass@5.6.7.8:8080",
+    "https://9.10.11.12:8080"
+  ]
+}

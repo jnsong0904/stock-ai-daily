@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>证券业 AI 动态日报 · 竞品调研</title>
+<link rel="stylesheet" href="assets/styles.css?v=10">
+</head>
+<body data-page="index">
+<div class="topbar"><div class="inner">
+  <div class="brand"><div class="logo">AI</div><div>证券业 AI 动态日报<small>券商产品经理 · 竞品调研台</small></div></div>
+  <nav class="topnav">
+    <a href="index.html" class="active">今日</a>
+    <a href="archive.html">历史归档</a>
+    <a href="matrix.html">竞品矩阵</a>
+    <a href="archive.html#about">说明</a>
+  </nav>
+</div></div>
+
+<div class="container">
+  <div class="banner info">📡 <strong>自动采集</strong>：每交易日 08:30 运行，数据源为 <strong>App Store 官方更新日志</strong>（券商 APP 版本迭代，识别含 AI 能力的更新）+ <strong>全网新闻（AI 联网搜索）</strong>（网页 / 新闻 / 券商官网 / 行业媒体转载，由 AI 联网搜索覆盖）。微信 / 公众号原文因平台限制不被通用搜索引擎收录，重大券商 AI 发布多被新闻与官网转载，故以全网新闻覆盖。历史基线由公开信息人工整理。仅供竞品研究参考，不构成投资建议。</div>
+
+  <div class="statusbar">
+    <div>
+      <div class="date"><span id="homeDate">—</span> <span id="homeWeekday"></span></div>
+      <div class="sub">当日证券业 AI 相关动态聚合</div>
+    </div>
+    <span id="tradeBadge" class="badge">—</span>
+    <div class="kpis">
+      <div class="kpi"><b id="kTotal">0</b><span>当日条数</span></div>
+      <div class="kpi"><b id="kBroker">0</b><span>覆盖券商</span></div>
+      <div class="kpi"><b id="kType">0</b><span>动态类型</span></div>
+    </div>
+  </div>
+  <div id="homeNote" class="banner" style="display:none"></div>
+
+  <div id="collectWindow" class="collect-window" style="display:none"></div>
+
+  <div class="toolbar">
+    <div class="seg" id="typeSeg"></div>
+    <div class="broker-wrap">
+      <span class="lbl">券商</span>
+      <select id="brokerSel"></select>
+    </div>
+    <div class="broker-wrap">
+      <span class="lbl">来源</span>
+      <select id="srcSel"></select>
+    </div>
+    <div class="grow"><span class="sub" style="align-self:center">共 <b id="cnt">0</b> 条</span></div>
+  </div>
+
+  <div class="feed" id="feed"></div>
+</div>
+
+<footer class="site">证券业 AI 动态日报 · 竞品调研站 ｜ 自动采集源：App Store · 全网新闻（AI 联网搜索）｜ 每交易日 08:30 更新（仅供研究参考，不构成投资建议）</footer>
+<script src="assets/app.js?v=10"></script>
+<script>
+  // 同步 segment选中态样式
+  const seg = document.getElementById("typeSeg");
+  seg.addEventListener("click", e=>{ if(e.target.tagName==="BUTTON"){ [...seg.children].forEach(b=>b.classList.remove("active")); e.target.classList.add("active"); seg.value=e.target.value; seg.dispatchEvent(new Event("change")); }});
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+name: 证券业AI日报-每日采集
+
+on:
+  schedule:
+    # 00:30 UTC = 08:30 北京时间，周一~周五（cron 的 1-5）。GitHub Actions cron 有时延迟数分钟。
+    - cron: '30 0 * * 1-5'
+  workflow_dispatch: {}  # 支持手动触发，用于首次上线验证
+
+permissions:
+  contents: write   # 回写 data.json / seen.json
+  pages: write      # 部署 Pages
+  id-token: write   # Pages 部署所需
+
+concurrency:
+  group: daily-collect
+  cancel-in-progress: false
+
+jobs:
+  collect-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: 运行采集管线（云端源：App Store + 东方财富，免 key）
+        env:
+          SEC_AI_SOURCES: scripts/sources.cloud.json
+        run: |
+          cd scripts
+          python collect.py
+
+      - name: 回写状态文件（data.json / seen.json / daily_*.json）
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/data/data.json scripts/seen.json 2>/dev/null
+          git add site/data/daily_*.json 2>/dev/null
+          if git diff --cached --quiet; then
+            echo "本次无新数据，跳过提交。"
+          else
+            git commit -m "chore: daily collect $(date -u -d '+8 hours' +%Y-%m-%d)"
+            git push
+          fi
+
+      - name: 飞书推送（可选，需在 Secrets 配 FEISHU_WEBHOOK）
+        continue-on-error: true
+        env:
+          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          FEISHU_WEBHOOK_SECRET: ${{ secrets.FEISHU_WEBHOOK_SECRET }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: python scripts/notify_feishu.py
+
+      - name: 部署 site/ 到 GitHub Pages
+        uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - uses: actions/deploy-pages@v4

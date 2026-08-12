@@ -1,0 +1,122 @@
+{
+  "note": "证券业 AI 动态日报 —— 采集源配置。type 字段对应 scripts/parsers.py 中的解析器；enabled=false 可临时停用某个源。",
+  "sources": [
+    {
+      "name": "券商APP版本更新日志（App Store 官方接口）",
+      "type": "appstore",
+      "enabled": true,
+      "covers": "第一类：券商 APP 中 AI 功能的迭代优化",
+      "endpoint": "https://itunes.apple.com/lookup",
+      "filter": "仅保留更新说明中含 AI 能力描述的版本；纯 Bug 修复类更新自动丢弃",
+      "apps": [
+        { "id": 6511224711, "broker": "华泰证券", "app": "AI涨乐" },
+        { "id": 379594830,  "broker": "华泰证券", "app": "涨乐财富通" },
+        { "id": 952047557,  "broker": "国泰海通", "app": "国泰海通君弘" },
+        { "id": 423525686,  "broker": "东方财富", "app": "东方财富" },
+        { "id": 303191318,  "broker": "同花顺",   "app": "同花顺" },
+        { "id": 705795925,  "broker": "广发证券", "app": "广发易淘金" },
+        { "id": 1042567321, "broker": "招商证券", "app": "招商证券（智远一户通）" },
+        { "id": 1101673632, "broker": "中信证券", "app": "中信证券信e投" },
+        { "id": 917565983,  "broker": "中金公司", "app": "中金财富" },
+        { "id": 441890370,  "broker": "银河证券", "app": "中国银河证券" },
+        { "id": 636344719,  "broker": "平安证券", "app": "平安证券" },
+        { "id": 1190176119, "broker": "国信证券", "app": "国信金太阳" },
+        { "id": 645811920,  "broker": "兴业证券", "app": "兴业证券优理宝" }
+      ]
+    },
+    {
+      "name": "AI 联网搜索（自动化 WebSearch 采集）",
+      "type": "websearch_raw",
+      "enabled": true,
+      "covers": "主数据源：每日自动化任务调用 AI 联网搜索（WebSearch）抓取券商/证券业 AI 动态，写出 scripts/websearch_raw.json，由 collect.py 用现有管线（指纹去重+分类+交易日窗口）并入。托管服务，不走沙箱被限流的共享 IP。",
+      "file": "scripts/websearch_raw.json"
+    },
+    {
+      "name": "全网 + 微信公众号资讯（券商AI动态）[已停用：改由 AI 联网搜索]",
+      "type": "sogou_wechat",
+      "enabled": false,
+      "_replaced_by": "websearch_raw（AI联网搜索覆盖新闻/官网/转载，公众号原文除外）",
+      "covers": "原替代东方财富：全网与微信公众号中关于券商自建 AI 的动态",
+      "endpoint": "https://weixin.sogou.com/weixin",
+      "maxPerQuery": 8,
+      "queryDelay": 1.5,
+      "fetchBody": false,
+      "keywords": [
+        "券商 AI 智能体",
+        "证券 大模型 应用 落地",
+        "券商 APP AI 智能",
+        "证券公司 AI 战略",
+        "券商 数字员工",
+        "证券 AI 投顾",
+        "券商 智能投研 AI",
+        "券商 智能体 上线"
+      ]
+    },
+    {
+      "name": "券商官方公众号（定向检索 · 官网源）[已停用：改由 AI 联网搜索]",
+      "type": "sogou_wechat",
+      "enabled": false,
+      "_replaced_by": "websearch_raw",
+      "official": true,
+      "covers": "原官网源：逐家券商官方微信公众号发布的 AI 动态",
+      "endpoint": "https://weixin.sogou.com/weixin",
+      "maxPerQuery": 6,
+      "queryDelay": 2.0,
+      "fetchBody": false,
+      "queries": [
+        { "kw": "华泰证券 AI 大模型 涨乐", "broker": "华泰证券" },
+        { "kw": "国泰海通 灵犀 大模型", "broker": "国泰海通" },
+        { "kw": "广发证券 智能体 AI", "broker": "广发证券" },
+        { "kw": "中信证券 人工智能 AI", "broker": "中信证券" },
+        { "kw": "招商证券 智能 AI", "broker": "招商证券" },
+        { "kw": "东方财富 妙想 AI", "broker": "东方财富" },
+        { "kw": "中金公司 人工智能 AI", "broker": "中金公司" },
+        { "kw": "银河证券 智能 AI", "broker": "银河证券" },
+        { "kw": "国信证券 智能 AI", "broker": "国信证券" },
+        { "kw": "兴业证券 智能 AI", "broker": "兴业证券" },
+        { "kw": "中信建投 AI 大模型", "broker": "中信建投" },
+        { "kw": "申万宏源 AI 智能", "broker": "申万宏源" },
+        { "kw": "平安证券 智能 AI", "broker": "平安证券" }
+      ]
+    },
+    {
+      "name": "全网新闻搜索（Bing News）[已停用：改由 AI 联网搜索]",
+      "type": "bing_news",
+      "enabled": false,
+      "_replaced_by": "websearch_raw（同一批索引，无需重复爬虫）",
+      "covers": "原全网新闻：Bing 新闻搜索聚合各新闻源",
+      "endpoint": "https://www.bing.com/news/search",
+      "maxPerQuery": 6,
+      "queryDelay": 1.5,
+      "fetchBody": true,
+      "keywords": [
+        "券商 AI 智能体",
+        "证券公司 大模型",
+        "券商 人工智能 应用",
+        "证券业 算法备案",
+        "券商 AI 投顾",
+        "华泰证券 AI",
+        "国泰海通 灵犀",
+        "广发证券 AI",
+        "中信证券 大模型"
+      ]
+    },
+    {
+      "name": "东方财富资讯搜索（已停用）",
+      "type": "eastmoney_search",
+      "enabled": false,
+      "covers": "停用原因：结果偏「券商研究 AI 行业」的投资观点，非「券商自己建 AI」的动态，已由微信源/联网搜索替代",
+      "endpoint": "https://search-api-web.eastmoney.com/search/jsonp",
+      "keywords": [
+        "券商 AI 智能体",
+        "证券 大模型 应用",
+        "券商 APP 智能",
+        "证券公司 AI 战略",
+        "券商 AI Skills",
+        "券商 数字员工",
+        "证券 AI 投顾",
+        "券商 智能投研"
+      ]
+    }
+  ]
+}
