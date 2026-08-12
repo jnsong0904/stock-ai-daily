@@ -120,6 +120,13 @@ def fingerprint(item):
     return hashlib.sha1(f"{url}|{title}".encode("utf-8")).hexdigest()[:16]
 
 
+# 跨源转载去重：同一文章被多源转载时，标题核心相同、仅末尾追加来源/栏目标签
+# （_搜狐网 / |agent|ai / __财经头条__新 / -中国证券协会 / ·快讯 等花样繁多）。
+# 用「归一化标题的子串包含」判定：短标题是长标题的子串（且≥12字）即视为同一篇。
+def _norm_title_dedup(title):
+    return re.sub(r"[\s，。、,；;：:！!?？()（）\[\]【】\"'“”‘’`]+", "", (title or "")).lower()
+
+
 def load_seen():
     if os.path.exists(SEEN_DB):
         with open(SEEN_DB, encoding="utf-8") as f:
@@ -277,13 +284,27 @@ def main():
             "note": rep.get("note", ""),
         })
 
-    # 闸门一：指纹去重
+    # 闸门一：指纹去重（URL+标题指纹 + 跨源转载子串去重）
     fresh_items, dup = [], 0
+    accepted_titles = []  # 本次运行已接受的归一化标题，用于跨源转载子串去重
     for it in raw:
         fp = fingerprint(it)
         if fp in seen:
             dup += 1
             continue
+        nt = _norm_title_dedup(it.get("title", ""))
+        is_cross_dup = False
+        if nt and len(nt) >= 12:
+            for at in accepted_titles:
+                # 短标题是长标题的子串（或反之）→ 同一文章跨源转载
+                if (nt in at) or (at in nt):
+                    is_cross_dup = True
+                    break
+        if is_cross_dup:
+            dup += 1
+            continue
+        if nt:
+            accepted_titles.append(nt)
         seen[fp] = {"firstSeen": today, "title": it.get("title", "")[:60]}
         it["fp"] = fp
         fresh_items.append(it)
