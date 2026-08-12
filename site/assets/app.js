@@ -75,6 +75,15 @@ async function loadData(){
   return DATA;
 }
 
+// 详情页【完整内容】只展示前 1-2 段，避免长文堆砌；完整内容走「查看原文」。
+function truncateContent(c){
+  if(!c) return "";
+  const paras = String(c).split(/\n+/).map(p=>p.trim()).filter(Boolean);
+  let head = paras.slice(0,2).join("\n");
+  if(head.length > 560) head = head.slice(0,560) + "…";
+  return head;
+}
+
 function rowHTML(it){
   const ti = typeInfo(it.type);
   const si = sourceInfo(sourceChannel(it));
@@ -143,6 +152,15 @@ function renderCollectWindow(el, header, items, reports){
     </div>`;
 }
 
+/* 分页：首页/归档页列表 50 条/页 */
+const PAGE_SIZE = 50;
+function pagerBarHTML(total, page){
+  const pages = Math.max(1, Math.ceil(total/PAGE_SIZE));
+  if(pages<=1) return "";
+  const p = Math.min(Math.max(1,page), pages);
+  const start=(p-1)*PAGE_SIZE+1, end=Math.min(p*PAGE_SIZE,total);
+  return `<div class="pager"><button type="button" data-pg="${p-1}" ${p<=1?'disabled':''}>‹ 上一页</button><span>第 ${p}/${pages} 页 · ${start}-${end} / 共 ${total} 条</span><button type="button" data-pg="${p+1}" ${p>=pages?'disabled':''}>下一页 ›</button></div>`;
+}
 /* ---------- 首页 ---------- */
 async function initIndex(){
   const {meta, items} = await loadData();
@@ -200,7 +218,8 @@ async function initIndex(){
   srcSel.innerHTML = `<option value="">全部来源</option>` +
     ALL_CHANNELS.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
 
-  function apply(){
+  let page = 1;
+  function getList(){
     const t = typeSeg.value;
     const br = brokerSel.value;
     const sc = srcSel.value;
@@ -208,14 +227,25 @@ async function initIndex(){
     if(t) list = list.filter(i=>i.type===t);
     if(br) list = list.filter(i=>i.broker===br);
     if(sc) list = list.filter(i=>sourceChannel(i)===sc);
-    // 按发布时间倒排（需求 #2）
-    list = list.slice().sort((a,b)=> (b.publishedAt||"").localeCompare(a.publishedAt||""));
-    renderFeed(feed, list);
+    return list.slice().sort((a,b)=> (b.publishedAt||"").localeCompare(a.publishedAt||""));
+  }
+  function repaint(){
+    const list = getList();
+    const pages = Math.max(1, Math.ceil(list.length/PAGE_SIZE));
+    if(page>pages) page = pages;
+    const slice = list.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE);
+    renderFeed(feed, slice);
+    feed.insertAdjacentHTML("beforeend", pagerBarHTML(list.length, page));
     document.getElementById("cnt").textContent = list.length;
   }
+  function apply(){ page = 1; repaint(); }
   typeSeg.addEventListener("change", apply);
   brokerSel.addEventListener("change", apply);
   srcSel.addEventListener("change", apply);
+  feed.addEventListener("click", e=>{
+    const b = e.target.closest("button[data-pg]"); if(!b) return;
+    const p = parseInt(b.dataset.pg,10); if(!isNaN(p) && p>=1){ page=p; repaint(); }
+  });
   apply();
 }
 
@@ -381,37 +411,50 @@ async function initArchive(){
   typeSel.innerHTML = `<option value="">全部分类</option>` + meta.types.map(t=>`<option value="${esc(t)}">${esc(t)}</option>`).join("");
   srcSel.innerHTML = `<option value="">全部来源</option>` + ALL_CHANNELS.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
 
-  function apply(){
-    const f = fromInput.value, t = toInput.value;
+  let page = 1;
+  function getList(){
+    const ff = fromInput.value, tt = toInput.value;
     const br = brokerSel.value, ty = typeSel.value, sc = srcSel.value;
     const q = search.value.trim().toLowerCase();
-    // 采集窗口只按日期区间统计（与各筛选条件无关）
-    let cwItems = items;
-    if(f) cwItems = cwItems.filter(i=> (i.date||"") >= f);
-    if(t) cwItems = cwItems.filter(i=> (i.date||"") <= t);
-    // 列表：叠加全部筛选
-    let list = cwItems;
+    let list = items;
+    if(ff) list = list.filter(i=> (i.date||"") >= ff);
+    if(tt) list = list.filter(i=> (i.date||"") <= tt);
     if(br) list = list.filter(i=>i.broker===br);
     if(ty) list = list.filter(i=>i.type===ty);
     if(sc) list = list.filter(i=>sourceChannel(i)===sc);
     if(q) list = list.filter(i =>
       (i.title+i.summary+i.content+i.broker+(i.app||"")+(i.module||"")+(i.tags||[]).join("")).toLowerCase().includes(q));
-    // 按发布时间倒排（需求 #2）
-    list = list.slice().sort((a,b)=> (b.publishedAt||"").localeCompare(a.publishedAt||""));
-    renderFeed(feed, list);
+    return list.slice().sort((a,b)=> (b.publishedAt||"").localeCompare(a.publishedAt||""));
+  }
+  function repaint(){
+    const list = getList();
+    const pages = Math.max(1, Math.ceil(list.length/PAGE_SIZE));
+    if(page>pages) page = pages;
+    const slice = list.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE);
+    renderFeed(feed, slice);
+    feed.insertAdjacentHTML("beforeend", pagerBarHTML(list.length, page));
     cnt.textContent = list.length;
-
-    // 采集窗口：聚合所选日期区间内各数据源的状态
+  }
+  function apply(){
+    page = 1;
+    // 采集窗口渲染（按日期区间）
+    const f = fromInput.value, t = toInput.value;
+    let cwItems = items;
+    if(f) cwItems = cwItems.filter(i=> (i.date||"") >= f);
+    if(t) cwItems = cwItems.filter(i=> (i.date||"") <= t);
     const reports = meta.collectionReports
-      ? Object.keys(meta.collectionReports)
-          .filter(d => (!f || d >= f) && (!t || d <= t))
-          .sort().map(d => meta.collectionReports[d])
+      ? Object.keys(meta.collectionReports).filter(d => (!f || d >= f) && (!t || d <= t)).sort().map(d => meta.collectionReports[d])
       : null;
     const hdr = (f||t) ? `所选区间：${f||"最早"} ~ ${t||"最新"}` : "全部日期";
     renderCollectWindow(document.getElementById("collectWindow"), hdr, cwItems, reports);
+    repaint();
   }
   [fromInput,toInput,brokerSel,typeSel,srcSel].forEach(s=>s.addEventListener("change",apply));
   search.addEventListener("input", apply);
+  feed.addEventListener("click", e=>{
+    const b = e.target.closest("button[data-pg]"); if(!b) return;
+    const p = parseInt(b.dataset.pg,10); if(!isNaN(p) && p>=1){ page=p; repaint(); }
+  });
   apply();
 }
 
@@ -443,7 +486,8 @@ async function initDetail(){
     <div class="section-h">内容摘要</div>
     <div class="detail-content">${esc(it.summary)}</div>
     <div class="section-h">完整内容</div>
-    <div class="detail-content">${esc(it.content)}</div>
+    <div class="detail-content">${esc(truncateContent(it.content))}</div>
+    ${String(it.content||"").trim().length > truncateContent(it.content).length ? `<div class="age" style="margin:4px 0 0">仅展示前 1-2 段，完整内容见「查看原文」</div>`:""}
     ${aKeys.length?`<div class="section-h">结构化解读</div><div class="analysis">`+
       aKeys.map(k=>`<div class="a-item"><div class="ak">${esc(k)}</div><div class="av">${esc(an[k])}</div></div>`).join("")+`</div>`:""}
     ${it.tags&&it.tags.length?`<div class="section-h">标签</div><div style="display:flex;gap:8px;flex-wrap:wrap">`+
