@@ -286,7 +286,9 @@ def main():
 
     # 闸门一：指纹去重（URL+标题指纹 + 跨源转载子串去重）
     fresh_items, dup = [], 0
-    accepted_titles = []  # 本次运行已接受的归一化标题，用于跨源转载子串去重
+    # 跨源去重要和已入库的 base 标题比对，否则同篇文章换个来源又会被当作新条目入库
+    accepted_titles = [t for t in (_norm_title_dedup(i.get("title", "")) for i in base_items)
+                       if t and len(t) >= 12]
     for it in raw:
         fp = fingerprint(it)
         if fp in seen:
