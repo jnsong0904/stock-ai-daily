@@ -247,6 +247,12 @@ BUILD_SIGNAL = ["上线", "落地", "发布", "推出", "升级", "迭代", "布
 # 「XX证券：」开头 —— 研报观点的结构性特征，直接否决
 RESEARCH_PREFIX = re.compile(r"^[\u4e00-\u9fa5]{2,6}(证券|建投|宏源|海通|财富)\s*[：:]")
 
+# 股票行情/数据页 —— 标题含这些词说明是行情页/数据页，与「券商自建 AI 产品」无关，直接否决
+# （典型 badcase：国泰海通(601211)_最新价格_行情_走势图_东方财富网）
+STOCK_PAGE_NOISE = ["走势图", "最新价格", "实时行情", "K线", "分时图", "换手率",
+                    "市盈率", "市净率", "资金流向", "盘口", "收盘价", "开盘价",
+                    "股票行情", "股价查询", "实时报价", "行情中心"]
+
 # 动态类型判定（优先级从高到低：法律合规 > Skill建设 > 未来规划 > 产品功能）
 #
 # ⚠️ 法律合规收窄标准（用户确认 2026-08-11）：
@@ -456,6 +462,9 @@ def parse_appstore(src, since, until):
 
 def _relevance(title, content):
     """三层过滤。返回 (是否通过, 得分, 判定说明)。"""
+    # 第零层：股票行情/数据页硬否决（如"国泰海通(601211)_最新价格_行情_走势图"）
+    if any(k in title for k in STOCK_PAGE_NOISE):
+        return False, -100, "股票行情/数据页（非AI产品动态）"
     # 第一层：结构性否决 —— 「XX证券：」开头是研报观点的固定格式
     if RESEARCH_PREFIX.match(title):
         return False, -99, "研报观点格式（券商名冒号开头）"
@@ -880,8 +889,8 @@ def parse_bing_news(src, since, until):
             # 信噪比过滤（复用三层逻辑）
             ok, score, why = _relevance(title, summary)
             # 对合规类关键词放宽过滤（备案/监管新闻可能不含 BUILD_SIGNAL）
-            compliance_kws = ["备案", "算法备案", "模型备案", "网信办", "监管", "安全评估"]
-            if not ok and any(k in (title + " " + summary) for k in compliance_kws):
+            compliance_kws = ["备案", "算法备案", "模型备案", "网信办", "深度合成", "生成式AI服务管理办法", "法规", "办法", "规定", "指引", "征求意见"]
+            if not ok and not any(k in title for k in STOCK_PAGE_NOISE) and any(k in (title + " " + summary) for k in compliance_kws):
                 ai_hit = _hit(title + " " + summary, AI_TERMS + AI_BRANDS)
                 broker_hit = _hit(title + " " + summary, BROKER_TERMS)
                 if ai_hit and broker_hit:
@@ -986,7 +995,7 @@ def parse_tavily(src, since, until):
     queries = src.get("queries") or [{"kw": k} for k in (src.get("keywords") or [])]
     max_per = int(src.get("maxPerQuery", 8))
     query_delay = float(src.get("queryDelay", 1.0))
-    compliance_kws = ["备案", "算法备案", "模型备案", "网信办", "监管", "安全评估"]
+    compliance_kws = ["备案", "算法备案", "模型备案", "网信办", "深度合成", "生成式AI服务管理办法", "法规", "办法", "规定", "指引", "征求意见"]
 
     seen_url, out = set(), []
     for q in queries:
@@ -1014,7 +1023,7 @@ def parse_tavily(src, since, until):
                 continue
 
             ok, score, why = _relevance(title, summary)
-            if not ok and any(k in (title + " " + summary) for k in compliance_kws):
+            if not ok and not any(k in title for k in STOCK_PAGE_NOISE) and any(k in (title + " " + summary) for k in compliance_kws):
                 ai_hit = _hit(title + " " + summary, AI_TERMS + AI_BRANDS)
                 broker_hit = _hit(title + " " + summary, BROKER_TERMS)
                 if ai_hit and broker_hit:
