@@ -51,6 +51,26 @@
       ]
     },
     {
+      "name": "全网搜索（Tavily · 真·全网，需 key）",
+      "type": "tavily",
+      "enabled": true,
+      "covers": "云版广度源：Tavily 聚合全网网页，覆盖东方财富索引不到的券商 AI 动态（官网/科技媒体/地方媒体/备案公示）。需环境变量 TAVILY_API_KEY；未配置自动跳过，不影响其他源。",
+      "maxPerQuery": 8,
+      "queryDelay": 1.0,
+      "keywords": [
+        "券商 AI 智能体",
+        "证券公司 大模型 应用 落地",
+        "券商 AI 投顾",
+        "证券业 算法备案",
+        "券商 智能体 上线",
+        "券商 数字员工",
+        "华泰证券 AI",
+        "国泰海通 灵犀",
+        "广发证券 AI",
+        "中信证券 大模型"
+      ]
+    },
+    {
       "name": "AI 联网搜索（WorkBuddy WebSearch）[云上禁用]",
       "type": "websearch_raw",
       "enabled": false,
