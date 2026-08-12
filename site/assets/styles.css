@@ -332,3 +332,10 @@ footer.site{text-align:center;color:var(--muted);font-size:12px;padding:24px;bor
   .bc-name{font-size:15.5px}
   .bc-body{grid-template-columns:1fr;gap:10px}
 }
+
+/* 分页 */
+.pager{display:flex;align-items:center;justify-content:center;gap:12px;padding:18px 0 8px;color:var(--muted);font-size:12.5px}
+.pager button{background:var(--line);border:0;color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px}
+.pager button:hover:not([disabled]){background:var(--accent);color:#fff}
+.pager button[disabled]{opacity:.45;cursor:not-allowed}
+.pager span{padding:0 4px}
