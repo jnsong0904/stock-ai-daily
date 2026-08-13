@@ -2,8 +2,10 @@ name: 证券业AI日报-每日采集
 
 on:
   schedule:
-    # 00:30 UTC = 08:30 北京时间，周一~周五（cron 的 1-5）。GitHub Actions cron 有时延迟数分钟。
-    - cron: '30 0 * * 1-5'
+    # GitHub 免费版定时任务在整点/半点高峰易被丢弃（实测 00:30 UTC 从未触发）。
+    # 改用非高峰分钟 00:37 UTC = 08:37 北京时间，周一~周五；并加 01:23 UTC(09:23北京) 兜底。
+    - cron: '37 0 * * 1-5'
+    - cron: '23 1 * * 1-5'
   workflow_dispatch: {}  # 支持手动触发，用于首次上线验证
 
 permissions:
