@@ -333,6 +333,8 @@ def main():
         },
     }
     base_meta.setdefault("collectionReports", {})
+    # 当天是否已有运行记录（用于飞书去重：仅当天首次运行才推送，避免兜底 schedule 重复推）
+    collect_report["isRepeatRun"] = today in base_meta["collectionReports"]
     base_meta["collectionReports"][today] = collect_report
 
     if fresh_items:
