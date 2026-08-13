@@ -86,6 +86,17 @@ def main():
     if not webhook:
         print("[notify] 未配置 FEISHU_WEBHOOK，跳过飞书推送。")
         return 0
+    # 当天非首次运行（兜底 schedule 二次触发）→ 跳过，避免一天推两次
+    try:
+        with open(DATA, encoding="utf-8") as f:
+            d = json.load(f)
+        today = today_bj()
+        rpt = (d.get("meta", {}).get("collectionReports") or {}).get(today) or {}
+        if rpt.get("isRepeatRun"):
+            print("[notify] 当天已运行过（isRepeatRun），跳过飞书推送，避免重复。")
+            return 0
+    except Exception as e:
+        print(f"[notify] 读取 isRepeatRun 失败（继续推送）：{e}")
     secret = os.environ.get("FEISHU_WEBHOOK_SECRET", "").strip()
     try:
         md = build_markdown()
