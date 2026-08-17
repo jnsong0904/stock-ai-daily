@@ -1,7 +1,7 @@
 {
   "meta": {
     "demo": false,
-    "generatedAt": "2026-08-17T10:07:19+08:00",
+    "generatedAt": "2026-08-17T10:35:33+08:00",
     "sourceNote": "数据来自公开网络信息（券商官方发布、上市公司公告/年报、WAIC/外滩大会报道、财经媒体公开报道），采集于 2026-08-11，仅供竞品研究参考，不构成投资建议。",
     "dates": [
       "2026-08-17",
@@ -107,12 +107,12 @@
       "until": "2026-08-17T08:30:00+08:00",
       "spanHours": 72,
       "prevTradingDay": "2026-08-14",
-      "runAt": "2026-08-17T10:07:19+08:00",
+      "runAt": "2026-08-17T10:35:33+08:00",
       "raw": 52,
-      "duplicated": 43,
-      "accepted": 9,
+      "duplicated": 52,
+      "accepted": 0,
       "backfill": 0,
-      "timeInferred": 9
+      "timeInferred": 0
     },
     "collectionReports": {
       "2026-08-11": {
@@ -295,7 +295,7 @@
         "until": "2026-08-17T08:30:00+08:00",
         "spanHours": 72,
         "prevTradingDay": "2026-08-14",
-        "runAt": "2026-08-17T10:07:19+08:00",
+        "runAt": "2026-08-17T10:35:33+08:00",
         "sources": [
           {
             "name": "券商APP版本更新日志（App Store 官方接口）",
@@ -330,12 +330,12 @@
         ],
         "totals": {
           "raw": 52,
-          "duplicated": 43,
-          "accepted": 9,
+          "duplicated": 52,
+          "accepted": 0,
           "backfill": 0,
-          "timeInferred": 9
+          "timeInferred": 0
         },
-        "isRepeatRun": false
+        "isRepeatRun": true
       }
     }
   },
