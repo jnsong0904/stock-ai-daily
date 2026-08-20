@@ -1,7 +1,7 @@
 {
   "meta": {
     "demo": false,
-    "generatedAt": "2026-08-20T10:04:51+08:00",
+    "generatedAt": "2026-08-20T10:32:43+08:00",
     "sourceNote": "数据来自公开网络信息（券商官方发布、上市公司公告/年报、WAIC/外滩大会报道、财经媒体公开报道），采集于 2026-08-11，仅供竞品研究参考，不构成投资建议。",
     "dates": [
       "2026-08-20",
@@ -119,12 +119,12 @@
       "until": "2026-08-20T08:30:00+08:00",
       "spanHours": 24,
       "prevTradingDay": "2026-08-19",
-      "runAt": "2026-08-20T10:04:51+08:00",
-      "raw": 52,
-      "duplicated": 49,
-      "accepted": 3,
+      "runAt": "2026-08-20T10:32:43+08:00",
+      "raw": 51,
+      "duplicated": 51,
+      "accepted": 0,
       "backfill": 0,
-      "timeInferred": 3
+      "timeInferred": 0
     },
     "collectionReports": {
       "2026-08-11": {
@@ -448,7 +448,7 @@
         "until": "2026-08-20T08:30:00+08:00",
         "spanHours": 24,
         "prevTradingDay": "2026-08-19",
-        "runAt": "2026-08-20T10:04:51+08:00",
+        "runAt": "2026-08-20T10:32:43+08:00",
         "sources": [
           {
             "name": "券商APP版本更新日志（App Store 官方接口）",
@@ -475,20 +475,20 @@
             "channel": "tavily",
             "status": "success",
             "error": "",
-            "fetched": 51,
+            "fetched": 50,
             "queryCount": null,
             "candidates": null,
             "note": ""
           }
         ],
         "totals": {
-          "raw": 52,
-          "duplicated": 49,
-          "accepted": 3,
+          "raw": 51,
+          "duplicated": 51,
+          "accepted": 0,
           "backfill": 0,
-          "timeInferred": 3
+          "timeInferred": 0
         },
-        "isRepeatRun": false
+        "isRepeatRun": true
       }
     }
   },
