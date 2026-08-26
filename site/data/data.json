@@ -1,7 +1,7 @@
 {
   "meta": {
     "demo": false,
-    "generatedAt": "2026-08-26T10:11:50+08:00",
+    "generatedAt": "2026-08-26T10:40:50+08:00",
     "sourceNote": "数据来自公开网络信息（券商官方发布、上市公司公告/年报、WAIC/外滩大会报道、财经媒体公开报道），采集于 2026-08-11，仅供竞品研究参考，不构成投资建议。",
     "dates": [
       "2026-08-26",
@@ -97,9 +97,9 @@
       "2026-08-25": 6,
       "2026-08-21": 11,
       "2026-08-24": 8,
-      "2026-08-26": 4
+      "2026-08-26": 5
     },
-    "total": 173,
+    "total": 174,
     "firstSeenDates": [
       "2026-08-26",
       "2026-08-25",
@@ -126,7 +126,7 @@
       "2026-08-25": 7,
       "2026-08-21": 11,
       "2026-08-24": 7,
-      "2026-08-26": 4
+      "2026-08-26": 5
     },
     "freshDays": 30,
     "windowPolicy": "上一交易日 08:30 → 今日 08:30（周一及节后首日自动回溯至上一交易日）",
@@ -136,12 +136,12 @@
       "until": "2026-08-26T08:30:00+08:00",
       "spanHours": 24,
       "prevTradingDay": "2026-08-25",
-      "runAt": "2026-08-26T10:11:50+08:00",
-      "raw": 53,
-      "duplicated": 49,
-      "accepted": 4,
+      "runAt": "2026-08-26T10:40:50+08:00",
+      "raw": 56,
+      "duplicated": 55,
+      "accepted": 1,
       "backfill": 0,
-      "timeInferred": 4
+      "timeInferred": 1
     },
     "collectionReports": {
       "2026-08-11": {
@@ -653,7 +653,7 @@
         "until": "2026-08-26T08:30:00+08:00",
         "spanHours": 24,
         "prevTradingDay": "2026-08-25",
-        "runAt": "2026-08-26T10:11:50+08:00",
+        "runAt": "2026-08-26T10:40:50+08:00",
         "sources": [
           {
             "name": "券商APP版本更新日志（App Store 官方接口）",
@@ -680,20 +680,20 @@
             "channel": "tavily",
             "status": "success",
             "error": "",
-            "fetched": 51,
+            "fetched": 54,
             "queryCount": null,
             "candidates": null,
             "note": ""
           }
         ],
         "totals": {
-          "raw": 53,
-          "duplicated": 49,
-          "accepted": 4,
+          "raw": 56,
+          "duplicated": 55,
+          "accepted": 1,
           "backfill": 0,
-          "timeInferred": 4
+          "timeInferred": 1
         },
-        "isRepeatRun": false
+        "isRepeatRun": true
       }
     }
   },
@@ -6567,6 +6567,37 @@
       "timeInferred": true,
       "firstSeenDate": "2026-08-26",
       "collectedAt": "2026-08-26T10:11:50+08:00",
+      "date": "2026-08-26",
+      "ageDays": 0,
+      "backfill": false
+    },
+    {
+      "id": "tv-636bf334eda9ec",
+      "broker": "华泰证券",
+      "app": "—",
+      "module": "行情交易",
+      "type": "产品功能",
+      "title": "华泰证券×火山引擎：打造国内首款AI原生交易APP",
+      "summary": "近日，华泰证券推出国内首款AI 原生交易APP——“AI 涨乐”。该APP 依托全AI 驱动模式，不再是简单的“AI 功能叠加”，而是通过重构服务逻辑，让AI 深度",
+      "content": "近日，华泰证券推出国内首款AI 原生交易APP——“AI 涨乐”。该APP 依托全AI 驱动模式，不再是简单的“AI 功能叠加”，而是通过重构服务逻辑，让AI 深度",
+      "source": "Tavily · 全网搜索",
+      "sourceType": "全网新闻",
+      "sourceUrl": "https://zhuanlan.zhihu.com/p/1979613427476484807",
+      "publishedAt": "2026-08-26T09:00:00+08:00",
+      "tags": [
+        "AI"
+      ],
+      "analysis": {
+        "相关度得分": "8",
+        "判定依据": "自建信号：推出、打造、APP",
+        "命中AI能力词": "AI",
+        "涉及机构": "华泰、华泰证券",
+        "检索关键词": "华泰证券 AI"
+      },
+      "fp": "8ae23b7700e12f5e",
+      "timeInferred": true,
+      "firstSeenDate": "2026-08-26",
+      "collectedAt": "2026-08-26T10:40:50+08:00",
       "date": "2026-08-26",
       "ageDays": 0,
       "backfill": false
