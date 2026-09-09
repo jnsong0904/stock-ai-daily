@@ -1,0 +1,81 @@
+{
+  "date": "2026-09-09",
+  "window": {
+    "since": "2026-09-08T08:30:00+08:00",
+    "until": "2026-09-09T08:30:00+08:00",
+    "spanHours": 24,
+    "prevTradingDay": "2026-09-08",
+    "runAt": "2026-09-09T13:06:48+08:00",
+    "raw": 55,
+    "duplicated": 53,
+    "accepted": 2,
+    "backfill": 0,
+    "timeInferred": 2
+  },
+  "items": [
+    {
+      "id": "tv-6a09cbb1d6f0b7",
+      "broker": "中信建投",
+      "app": "—",
+      "module": "智能投研",
+      "type": "Skill建设",
+      "title": "券商自研金融AI技能落地，中信建投Skill上线，打造智能投研技能生态",
+      "summary": "此次中信建投推出的蜻蜓Skill广场，其核心理念为“一句话调技能，让投资更智能”，可通过技能插件形式为各类AI智能体赋能专业投研数据能力，相当于为智能",
+      "content": "此次中信建投推出的蜻蜓Skill广场，其核心理念为“一句话调技能，让投资更智能”，可通过技能插件形式为各类AI智能体赋能专业投研数据能力，相当于为智能",
+      "source": "Tavily · 全网搜索",
+      "sourceType": "全网新闻",
+      "sourceUrl": "https://finance.cnr.cn/zghq/20260717/t20260717_527715007.shtml",
+      "publishedAt": "2026-09-09T09:00:00+08:00",
+      "tags": [
+        "AI",
+        "Skill",
+        "智能体"
+      ],
+      "analysis": {
+        "相关度得分": "12",
+        "判定依据": "自建信号：上线、落地、推出",
+        "命中AI能力词": "AI、Skill、智能体",
+        "涉及机构": "中信建投、券商",
+        "检索关键词": "券商 智能体 上线"
+      },
+      "fp": "0dedb2d6088a9897",
+      "timeInferred": true,
+      "firstSeenDate": "2026-09-09",
+      "collectedAt": "2026-09-09T13:06:48+08:00",
+      "date": "2026-09-09",
+      "ageDays": 0,
+      "backfill": false
+    },
+    {
+      "id": "tv-4b2cbaf7501a77",
+      "broker": "证券业",
+      "app": "—",
+      "module": "财富管理",
+      "type": "Skill建设",
+      "title": "券商首批！4家券商智能体入驻千问开放平台 - ZAKER",
+      "summary": "《每日经济新闻》记者注意到，在证券投资领域，共有4 家券商智能体入驻千问开放平台，分别是兴业证券、国泰海通、东吴证券和中金财富。 以国泰海通为例，",
+      "content": "《每日经济新闻》记者注意到，在证券投资领域，共有4 家券商智能体入驻千问开放平台，分别是兴业证券、国泰海通、东吴证券和中金财富。 以国泰海通为例，",
+      "source": "Tavily · 全网搜索",
+      "sourceType": "全网新闻",
+      "sourceUrl": "https://app.myzaker.com/article/6a9faa138e9f091d3d316c14",
+      "publishedAt": "2026-09-09T09:00:00+08:00",
+      "tags": [
+        "智能体"
+      ],
+      "analysis": {
+        "相关度得分": "2",
+        "判定依据": "自建信号：开放",
+        "命中AI能力词": "智能体",
+        "涉及机构": "兴业证券、券商、国泰海通",
+        "检索关键词": "券商 智能体 上线"
+      },
+      "fp": "47a705047aa623ee",
+      "timeInferred": true,
+      "firstSeenDate": "2026-09-09",
+      "collectedAt": "2026-09-09T13:06:48+08:00",
+      "date": "2026-09-09",
+      "ageDays": 0,
+      "backfill": false
+    }
+  ]
+}
