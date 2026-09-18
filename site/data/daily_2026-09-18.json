@@ -1,0 +1,50 @@
+{
+  "date": "2026-09-18",
+  "window": {
+    "since": "2026-09-17T08:30:00+08:00",
+    "until": "2026-09-18T08:30:00+08:00",
+    "spanHours": 24,
+    "prevTradingDay": "2026-09-17",
+    "runAt": "2026-09-18T14:01:45+08:00",
+    "raw": 57,
+    "duplicated": 56,
+    "accepted": 1,
+    "backfill": 0,
+    "timeInferred": 1
+  },
+  "items": [
+    {
+      "id": "tv-5db7c8d6d3f490",
+      "broker": "证券业",
+      "app": "—",
+      "module": "财富管理",
+      "type": "Skill建设",
+      "title": "券商涌入WorkBuddy等AI平台角力下一个流量入口 - 时间线- 搜狐",
+      "summary": "9月7日，千问开放平台上线了十余款金融智能体，其中包括国泰海通灵犀、兴业证券智能投资助手、东吴秀财、中金财富等4款券商智能体。 与WorkBuddy的“技能",
+      "content": "9月7日，千问开放平台上线了十余款金融智能体，其中包括国泰海通灵犀、兴业证券智能投资助手、东吴秀财、中金财富等4款券商智能体。 与WorkBuddy的“技能",
+      "source": "Tavily · 全网搜索",
+      "sourceType": "全网新闻",
+      "sourceUrl": "https://timeline.sohu.com/news/kvISjlCgRy",
+      "publishedAt": "2026-09-18T09:00:00+08:00",
+      "tags": [
+        "AI",
+        "智能体",
+        "灵犀"
+      ],
+      "analysis": {
+        "相关度得分": "4",
+        "判定依据": "自建信号：上线、开放",
+        "命中AI能力词": "AI、智能体、灵犀",
+        "涉及机构": "兴业证券、券商、国泰海通",
+        "检索关键词": "券商 智能体 上线"
+      },
+      "fp": "37a35eb8b57b27ae",
+      "timeInferred": true,
+      "firstSeenDate": "2026-09-18",
+      "collectedAt": "2026-09-18T14:01:45+08:00",
+      "date": "2026-09-18",
+      "ageDays": 0,
+      "backfill": false
+    }
+  ]
+}
