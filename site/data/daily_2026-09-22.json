@@ -1,0 +1,83 @@
+{
+  "date": "2026-09-22",
+  "window": {
+    "since": "2026-09-21T08:30:00+08:00",
+    "until": "2026-09-22T08:30:00+08:00",
+    "spanHours": 24,
+    "prevTradingDay": "2026-09-21",
+    "runAt": "2026-09-22T13:19:09+08:00",
+    "raw": 55,
+    "duplicated": 53,
+    "accepted": 2,
+    "backfill": 0,
+    "timeInferred": 2
+  },
+  "items": [
+    {
+      "id": "tv-983aec0106cc1f",
+      "broker": "证券业",
+      "app": "—",
+      "module": "综合平台",
+      "type": "Skill建设",
+      "title": "12家券商把账户交给了AI，OpenAI同周承认：自家的智能体 ...",
+      "summary": "Public在2026年3月第一个上线，Robinhood在5月27日跟进，Webull的MCP服务4月就活了，Coinbase在6月推出Coinbase for Agents。最新的一家里，德国的",
+      "content": "Public在2026年3月第一个上线，Robinhood在5月27日跟进，Webull的MCP服务4月就活了，Coinbase在6月推出Coinbase for Agents。最新的一家里，德国的",
+      "source": "Tavily · 全网搜索",
+      "sourceType": "全网新闻",
+      "sourceUrl": "https://zhuanlan.zhihu.com/p/2077420625166078303",
+      "publishedAt": "2026-09-22T09:00:00+08:00",
+      "tags": [
+        "AI",
+        "Agent",
+        "智能体"
+      ],
+      "analysis": {
+        "相关度得分": "4",
+        "判定依据": "自建信号：上线、推出",
+        "命中AI能力词": "AI、Agent、智能体",
+        "涉及机构": "券商",
+        "检索关键词": "券商 智能体 上线"
+      },
+      "fp": "17d0d8c3406b2bb5",
+      "timeInferred": true,
+      "firstSeenDate": "2026-09-22",
+      "collectedAt": "2026-09-22T13:19:09+08:00",
+      "date": "2026-09-22",
+      "ageDays": 0,
+      "backfill": false
+    },
+    {
+      "id": "tv-064abf9a0f113d",
+      "broker": "广发证券",
+      "app": "—",
+      "module": "客户服务",
+      "type": "产品功能",
+      "title": "广州日报-广发证券全面拥抱AI 引领金融业智能化浪潮",
+      "summary": "以广发证券内部员工展业为例，传统的人工检索模式响应滞后、信息整合效率低。为此，广发证券在内部员工展业平台“金钥匙”上部署了基于DeepSeek的新一代智能问答系统——“智能犇犇”。该系统创新性地将金钥匙平台沉淀的百万级高质量问答数据作为训练基底，通过多维度参数调优与上下文语义理解技术，实现了精准知识匹配、智能内容生成及",
+      "content": "以广发证券内部员工展业为例，传统的人工检索模式响应滞后、信息整合效率低。为此，广发证券在内部员工展业平台“金钥匙”上部署了基于DeepSeek的新一代智能问答系统——“智能犇犇”。该系统创新性地将金钥匙平台沉淀的百万级高质量问答数据作为训练基底，通过多维度参数调优与上下文语义理解技术，实现了精准知识匹配、智能内容生成及动态进化机制三大突破。员工在使用“智能犇犇”时，能够迅速获得高效、准确的知识支持，极大地提升了工作效率和服务质量。这一系统的更新，不仅为广发证券的内部员工提供了便捷的知识获取途径，也进一步推动了公司知识管理的智能化进程。",
+      "source": "Tavily · 全网搜索",
+      "sourceType": "全网新闻",
+      "sourceUrl": "https://gzdaily.dayoo.com/h5/html5/2025-04/28/content_881_885401.htm",
+      "publishedAt": "2026-09-22T09:00:00+08:00",
+      "tags": [
+        "AI",
+        "DeepSeek",
+        "智能问答"
+      ],
+      "analysis": {
+        "相关度得分": "4",
+        "判定依据": "自建信号：展业、部署",
+        "命中AI能力词": "AI、DeepSeek、智能问答",
+        "涉及机构": "广发证券",
+        "检索关键词": "广发证券 AI"
+      },
+      "fp": "4c1fa8f5760a543f",
+      "timeInferred": true,
+      "firstSeenDate": "2026-09-22",
+      "collectedAt": "2026-09-22T13:19:09+08:00",
+      "date": "2026-09-22",
+      "ageDays": 0,
+      "backfill": false
+    }
+  ]
+}
