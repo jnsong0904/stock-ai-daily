@@ -1,0 +1,50 @@
+{
+  "date": "2026-09-30",
+  "window": {
+    "since": "2026-09-29T08:30:00+08:00",
+    "until": "2026-09-30T08:30:00+08:00",
+    "spanHours": 24,
+    "prevTradingDay": "2026-09-29",
+    "runAt": "2026-09-30T14:50:39+08:00",
+    "raw": 60,
+    "duplicated": 59,
+    "accepted": 1,
+    "backfill": 0,
+    "timeInferred": 1
+  },
+  "items": [
+    {
+      "id": "tv-a8f5c965a22103",
+      "broker": "华泰证券",
+      "app": "—",
+      "module": "综合平台",
+      "type": "产品功能",
+      "title": "华泰证券携手世界人工智能大会，洞察AI大模型的投资机遇",
+      "summary": "华泰证券于2023世界人工智能大会举办“ 聚焦当下备受关注的AI大模型,论坛前瞻技术发展趋势,并就金融等产业的广泛应用场景,探讨技术的落地路径和面临的挑战",
+      "content": "华泰证券于2023世界人工智能大会举办“ 聚焦当下备受关注的AI大模型,论坛前瞻技术发展趋势,并就金融等产业的广泛应用场景,探讨技术的落地路径和面临的挑战",
+      "source": "Tavily · 全网搜索",
+      "sourceType": "全网新闻",
+      "sourceUrl": "https://web.htsc.com.cn/aboutht/information/jumpNewsInfo.do?docId=16354422&manage=2",
+      "publishedAt": "2026-09-30T09:00:00+08:00",
+      "tags": [
+        "AI",
+        "人工智能",
+        "大模型"
+      ],
+      "analysis": {
+        "相关度得分": "2",
+        "判定依据": "自建信号：落地",
+        "命中AI能力词": "AI、人工智能、大模型",
+        "涉及机构": "华泰、华泰证券",
+        "检索关键词": "华泰证券 AI"
+      },
+      "fp": "ad9849d709ae9835",
+      "timeInferred": true,
+      "firstSeenDate": "2026-09-30",
+      "collectedAt": "2026-09-30T14:50:39+08:00",
+      "date": "2026-09-30",
+      "ageDays": 0,
+      "backfill": false
+    }
+  ]
+}

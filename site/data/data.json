@@ -1,9 +1,10 @@
 {
   "meta": {
     "demo": false,
-    "generatedAt": "2026-09-30T13:54:20+08:00",
+    "generatedAt": "2026-09-30T14:50:39+08:00",
     "sourceNote": "数据来自公开网络信息（券商官方发布、上市公司公告/年报、WAIC/外滩大会报道、财经媒体公开报道），采集于 2026-08-11，仅供竞品研究参考，不构成投资建议。",
     "dates": [
+      "2026-09-30",
       "2026-09-29",
       "2026-09-28",
       "2026-09-27",
@@ -148,10 +149,12 @@
       "2026-09-23": 4,
       "2026-09-27": 1,
       "2026-09-28": 4,
-      "2026-09-29": 4
+      "2026-09-29": 4,
+      "2026-09-30": 1
     },
-    "total": 315,
+    "total": 316,
     "firstSeenDates": [
+      "2026-09-30",
       "2026-09-29",
       "2026-09-28",
       "2026-09-24",
@@ -223,7 +226,8 @@
       "2026-09-22": 3,
       "2026-09-23": 4,
       "2026-09-28": 5,
-      "2026-09-29": 4
+      "2026-09-29": 4,
+      "2026-09-30": 1
     },
     "freshDays": 30,
     "windowPolicy": "上一交易日 08:30 → 今日 08:30（周一及节后首日自动回溯至上一交易日）",
@@ -233,12 +237,12 @@
       "until": "2026-09-30T08:30:00+08:00",
       "spanHours": 24,
       "prevTradingDay": "2026-09-29",
-      "runAt": "2026-09-30T13:54:20+08:00",
-      "raw": 58,
-      "duplicated": 58,
-      "accepted": 0,
+      "runAt": "2026-09-30T14:50:39+08:00",
+      "raw": 60,
+      "duplicated": 59,
+      "accepted": 1,
       "backfill": 0,
-      "timeInferred": 0
+      "timeInferred": 1
     },
     "collectionReports": {
       "2026-08-11": {
@@ -1878,7 +1882,7 @@
         "until": "2026-09-30T08:30:00+08:00",
         "spanHours": 24,
         "prevTradingDay": "2026-09-29",
-        "runAt": "2026-09-30T13:54:20+08:00",
+        "runAt": "2026-09-30T14:50:39+08:00",
         "sources": [
           {
             "name": "券商APP版本更新日志（App Store 官方接口）",
@@ -1905,20 +1909,20 @@
             "channel": "tavily",
             "status": "success",
             "error": "",
-            "fetched": 55,
+            "fetched": 57,
             "queryCount": null,
             "candidates": null,
             "note": ""
           }
         ],
         "totals": {
-          "raw": 58,
-          "duplicated": 58,
-          "accepted": 0,
+          "raw": 60,
+          "duplicated": 59,
+          "accepted": 1,
           "backfill": 0,
-          "timeInferred": 0
+          "timeInferred": 1
         },
-        "isRepeatRun": false
+        "isRepeatRun": true
       }
     }
   },
@@ -12640,6 +12644,39 @@
       "firstSeenDate": "2026-09-29",
       "collectedAt": "2026-09-29T15:01:14+08:00",
       "date": "2026-09-29",
+      "ageDays": 0,
+      "backfill": false
+    },
+    {
+      "id": "tv-a8f5c965a22103",
+      "broker": "华泰证券",
+      "app": "—",
+      "module": "综合平台",
+      "type": "产品功能",
+      "title": "华泰证券携手世界人工智能大会，洞察AI大模型的投资机遇",
+      "summary": "华泰证券于2023世界人工智能大会举办“ 聚焦当下备受关注的AI大模型,论坛前瞻技术发展趋势,并就金融等产业的广泛应用场景,探讨技术的落地路径和面临的挑战",
+      "content": "华泰证券于2023世界人工智能大会举办“ 聚焦当下备受关注的AI大模型,论坛前瞻技术发展趋势,并就金融等产业的广泛应用场景,探讨技术的落地路径和面临的挑战",
+      "source": "Tavily · 全网搜索",
+      "sourceType": "全网新闻",
+      "sourceUrl": "https://web.htsc.com.cn/aboutht/information/jumpNewsInfo.do?docId=16354422&manage=2",
+      "publishedAt": "2026-09-30T09:00:00+08:00",
+      "tags": [
+        "AI",
+        "人工智能",
+        "大模型"
+      ],
+      "analysis": {
+        "相关度得分": "2",
+        "判定依据": "自建信号：落地",
+        "命中AI能力词": "AI、人工智能、大模型",
+        "涉及机构": "华泰、华泰证券",
+        "检索关键词": "华泰证券 AI"
+      },
+      "fp": "ad9849d709ae9835",
+      "timeInferred": true,
+      "firstSeenDate": "2026-09-30",
+      "collectedAt": "2026-09-30T14:50:39+08:00",
+      "date": "2026-09-30",
       "ageDays": 0,
       "backfill": false
     }
