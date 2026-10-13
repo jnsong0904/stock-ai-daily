@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-13",
+  "window": {
+    "since": "2026-10-12T08:30:00+08:00",
+    "until": "2026-10-13T08:30:00+08:00",
+    "spanHours": 24,
+    "prevTradingDay": "2026-10-12",
+    "runAt": "2026-10-13T15:02:42+08:00",
+    "raw": 57,
+    "duplicated": 56,
+    "accepted": 1,
+    "backfill": 0,
+    "timeInferred": 1
+  },
+  "items": [
+    {
+      "id": "tv-a1642b4ba4de6e",
+      "broker": "兴业证券",
+      "app": "—",
+      "module": "行情交易",
+      "type": "Skill建设",
+      "title": "兴业证券投教AI智能体上线，您的24小时投教助手!",
+      "summary": "这只精通股票、财报、交易知识的“机智猫”，融合了兴业证券的专业投教积淀与蚂蚁集团的AI智能体技术。它依托企业级知识库与强大的场景交互能力，借助支付宝",
+      "content": "这只精通股票、财报、交易知识的“机智猫”，融合了兴业证券的专业投教积淀与蚂蚁集团的AI智能体技术。它依托企业级知识库与强大的场景交互能力，借助支付宝",
+      "source": "Tavily · 全网搜索",
+      "sourceType": "全网新闻",
+      "sourceUrl": "https://finance.sina.com.cn/roll/2025-07-15/doc-inffpwtu3921575.shtml",
+      "publishedAt": "2026-10-13T09:00:00+08:00",
+      "tags": [
+        "AI",
+        "智能体"
+      ],
+      "analysis": {
+        "相关度得分": "2",
+        "判定依据": "自建信号：上线",
+        "命中AI能力词": "AI、智能体",
+        "涉及机构": "兴业证券",
+        "检索关键词": "券商 智能体 上线"
+      },
+      "fp": "f23e73a3d5d3c3a8",
+      "timeInferred": true,
+      "firstSeenDate": "2026-10-13",
+      "collectedAt": "2026-10-13T15:02:42+08:00",
+      "date": "2026-10-13",
+      "ageDays": 0,
+      "backfill": false
+    }
+  ]
+}
