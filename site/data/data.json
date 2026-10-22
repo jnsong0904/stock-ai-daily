@@ -1,7 +1,7 @@
 {
   "meta": {
     "demo": false,
-    "generatedAt": "2026-10-21T14:07:39+08:00",
+    "generatedAt": "2026-10-22T13:16:53+08:00",
     "sourceNote": "数据来自公开网络信息（券商官方发布、上市公司公告/年报、WAIC/外滩大会报道、财经媒体公开报道），采集于 2026-08-11，仅供竞品研究参考，不构成投资建议。",
     "dates": [
       "2026-10-21",
@@ -276,16 +276,16 @@
     "windowPolicy": "上一交易日 08:30 → 今日 08:30（周一及节后首日自动回溯至上一交易日）",
     "dedupe": "URL 归一化 + 标题指纹（seen.json），仅首次发现计入当日",
     "lastWindow": {
-      "since": "2026-10-20T08:30:00+08:00",
-      "until": "2026-10-21T08:30:00+08:00",
+      "since": "2026-10-21T08:30:00+08:00",
+      "until": "2026-10-22T08:30:00+08:00",
       "spanHours": 24,
-      "prevTradingDay": "2026-10-20",
-      "runAt": "2026-10-21T14:07:39+08:00",
-      "raw": 64,
-      "duplicated": 60,
-      "accepted": 4,
+      "prevTradingDay": "2026-10-21",
+      "runAt": "2026-10-22T13:16:53+08:00",
+      "raw": 61,
+      "duplicated": 61,
+      "accepted": 0,
       "backfill": 0,
-      "timeInferred": 4
+      "timeInferred": 0
     },
     "collectionReports": {
       "2026-08-11": {
@@ -2436,6 +2436,53 @@
           "timeInferred": 4
         },
         "isRepeatRun": true
+      },
+      "2026-10-22": {
+        "since": "2026-10-21T08:30:00+08:00",
+        "until": "2026-10-22T08:30:00+08:00",
+        "spanHours": 24,
+        "prevTradingDay": "2026-10-21",
+        "runAt": "2026-10-22T13:16:53+08:00",
+        "sources": [
+          {
+            "name": "券商APP版本更新日志（App Store 官方接口）",
+            "channel": "App Store",
+            "status": "success",
+            "error": "",
+            "fetched": 6,
+            "queryCount": null,
+            "candidates": null,
+            "note": ""
+          },
+          {
+            "name": "全网新闻（东方财富资讯搜索 · 免 key）",
+            "channel": "eastmoney_search",
+            "status": "empty",
+            "error": "",
+            "fetched": 0,
+            "queryCount": null,
+            "candidates": null,
+            "note": ""
+          },
+          {
+            "name": "全网搜索（Tavily · 真·全网，需 key）",
+            "channel": "tavily",
+            "status": "success",
+            "error": "",
+            "fetched": 55,
+            "queryCount": null,
+            "candidates": null,
+            "note": ""
+          }
+        ],
+        "totals": {
+          "raw": 61,
+          "duplicated": 61,
+          "accepted": 0,
+          "backfill": 0,
+          "timeInferred": 0
+        },
+        "isRepeatRun": false
       }
     }
   },
