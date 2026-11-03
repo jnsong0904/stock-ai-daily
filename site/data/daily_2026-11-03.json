@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-03",
+  "window": {
+    "since": "2026-11-02T08:30:00+08:00",
+    "until": "2026-11-03T08:30:00+08:00",
+    "spanHours": 24,
+    "prevTradingDay": "2026-11-02",
+    "runAt": "2026-11-03T15:11:11+08:00",
+    "raw": 58,
+    "duplicated": 57,
+    "accepted": 1,
+    "backfill": 0,
+    "timeInferred": 0
+  },
+  "items": [
+    {
+      "id": "as-6511224711-2_0_5",
+      "broker": "华泰证券",
+      "app": "AI涨乐",
+      "module": "行情交易",
+      "type": "产品功能",
+      "title": "AI涨乐 v2.0.5：功能体验优化：优化AI交易员开通签约流程",
+      "summary": "功能体验优化：优化AI交易员开通签约流程",
+      "content": "功能体验优化：优化AI交易员开通签约流程。",
+      "source": "App Store 官方更新日志",
+      "sourceType": "App Store",
+      "sourceUrl": "https://apps.apple.com/cn/app/%E6%B6%A8%E4%B9%90-ai%E6%B6%A8%E4%B9%90-%E5%8D%87%E8%BF%90%E7%89%88/id6511224711?uo=4",
+      "publishedAt": "2026-11-02T19:40:28+08:00",
+      "tags": [
+        "AI",
+        "v2.0.5"
+      ],
+      "analysis": {
+        "版本号": "2.0.5",
+        "命中AI能力词": "AI",
+        "更新日志全文": "功能体验优化：优化AI交易员开通签约流程。",
+        "识别依据": "Apple iTunes Lookup 官方接口返回的 releaseNotes 字段，含 AI 能力描述"
+      },
+      "fp": "1647d16280310d82",
+      "timeInferred": false,
+      "firstSeenDate": "2026-11-03",
+      "collectedAt": "2026-11-03T15:11:11+08:00",
+      "date": "2026-11-02",
+      "ageDays": 1,
+      "backfill": false
+    }
+  ]
+}
