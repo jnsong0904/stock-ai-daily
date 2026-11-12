@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-12",
+  "window": {
+    "since": "2026-11-11T08:30:00+08:00",
+    "until": "2026-11-12T08:30:00+08:00",
+    "spanHours": 24,
+    "prevTradingDay": "2026-11-11",
+    "runAt": "2026-11-12T15:38:55+08:00",
+    "raw": 57,
+    "duplicated": 56,
+    "accepted": 1,
+    "backfill": 0,
+    "timeInferred": 1
+  },
+  "items": [
+    {
+      "id": "tv-72d5697036c043",
+      "broker": "证券业",
+      "app": "—",
+      "module": "财富管理",
+      "type": "Skill建设",
+      "title": "都在接DeepSeek、WorkBuddy，券商AI最终靠什么拉开差距？",
+      "summary": "Oct 4, 2026 — 9月7日，阿里千问开放平台上线十余款金融智能体，其中国泰海通“灵犀”、兴业证券智能投资助手、东吴“秀财”、中金财富4款为券商智能体；",
+      "content": "Oct 4, 2026 — 9月7日，阿里千问开放平台上线十余款金融智能体，其中国泰海通“灵犀”、兴业证券智能投资助手、东吴“秀财”、中金财富4款为券商智能体；",
+      "source": "Tavily · 全网搜索",
+      "sourceType": "全网新闻",
+      "sourceUrl": "https://feng.ifeng.com/c/8wwwdK7iFNU",
+      "publishedAt": "2026-11-12T09:00:00+08:00",
+      "tags": [
+        "AI",
+        "DeepSeek",
+        "智能体",
+        "灵犀"
+      ],
+      "analysis": {
+        "相关度得分": "4",
+        "判定依据": "自建信号：上线、开放",
+        "命中AI能力词": "AI、DeepSeek、智能体、灵犀",
+        "涉及机构": "兴业证券、券商、国泰海通",
+        "检索关键词": "券商 智能体 上线"
+      },
+      "fp": "d435d4de68baa98e",
+      "timeInferred": true,
+      "firstSeenDate": "2026-11-12",
+      "collectedAt": "2026-11-12T15:38:55+08:00",
+      "date": "2026-11-12",
+      "ageDays": 0,
+      "backfill": false
+    }
+  ]
+}
